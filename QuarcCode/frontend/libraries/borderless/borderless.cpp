@@ -14,11 +14,6 @@
 
 
 namespace {
-	// we cannot just use WS_POPUP style
-	// WS_THICKFRAME: without this the window cannot be resized and so aero snap, de-maximizing and minimizing won't work
-	// WS_SYSMENU: enables the context menu with the move, close, maximize, minize... commands (shift + right-click on the task bar item)
-	// WS_CAPTION: enables aero minimize animation/transition
-	// WS_MAXIMIZEBOX, WS_MINIMIZEBOX: enable minimize/maximize
 	enum class Style : DWORD {
 		windowed = WS_OVERLAPPEDWINDOW | WS_THICKFRAME | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
 		aero_borderless = WS_POPUP | WS_THICKFRAME | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX,
@@ -34,10 +29,6 @@ namespace {
 		return placement.showCmd == SW_MAXIMIZE;
 	}
 
-	/* Adjust client rect to not spill over monitor edges when maximized.
-	 * rect(in/out): in: proposed window rect, out: calculated client rect
-	 * Does nothing if the window is not maximized.
-	 */
 	auto adjust_maximized_client_rect(HWND window, RECT& rect) -> void {
 		if (!maximized(window)) {
 			return;

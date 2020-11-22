@@ -9,6 +9,6 @@ int CALLBACK wWinMain(HINSTANCE /*inst*/, HINSTANCE /*prev*/, LPWSTR /*cmd*/, in
 	}
 	catch (const std::exception& e)
 	{
-		::MessageBoxA(nullptr, e.what(), "Unhandled Exception", MB_OK | MB_ICONERROR);
+		::MessageBoxA(nullptr, e.what(), "QuarcCode Exception Handler", MB_OK | MB_ICONERROR);
 	}
 }
