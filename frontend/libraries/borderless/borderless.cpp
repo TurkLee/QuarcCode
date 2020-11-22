@@ -97,7 +97,7 @@ namespace {
 
 	auto create_window(WNDPROC wndproc, void* userdata) -> unique_handle
 	{
-		auto handle = CreateWindowExW(0, window_class(wndproc), L"Borderless Window", static_cast<DWORD>(Style::aero_borderless), 100, 100, 1280, 720, nullptr, nullptr, nullptr, userdata);
+		auto handle = CreateWindowExW(0, window_class(wndproc), L"QuarcCode", static_cast<DWORD>(Style::basic_borderless), 100, 100, 1280, 720, nullptr, nullptr, nullptr, userdata);
 
 		if (!handle)
 			throw last_error("failed to create window");
@@ -126,6 +126,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 	ImGui_ImplDX9_Init(g_pd3dDevice);
 
 	MSG msg;
+
 	while (::GetMessageW(&msg, nullptr, 0, 0) == TRUE)
 	{
 		::TranslateMessage(&msg);
@@ -136,24 +137,25 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 
 		ImGui::NewFrame();
 
-		ImGui::ShowDemoWindow();
+
 
 		ImGui::EndFrame();
 
 		g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 		g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 		g_pd3dDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
-		D3DCOLOR clear_col_dx = D3DCOLOR_RGBA((int)(255), (int)(255), (int)(255), (int)(255));
+		D3DCOLOR clear_col_dx = D3DCOLOR_RGBA((int)(55), (int)(55), (int)(55), (int)(255));
 		g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, clear_col_dx, 1.0f, 0);
+
 		if (g_pd3dDevice->BeginScene() >= 0)
 		{
 			ImGui::Render();
 			ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 			g_pd3dDevice->EndScene();
 		}
+
 		HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
 
-		// Handle loss of D3D9 device
 		if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 			ResetDevice();
 	}

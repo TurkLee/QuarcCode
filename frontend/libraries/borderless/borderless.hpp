@@ -78,7 +78,7 @@ private:
 	static auto CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) noexcept -> LRESULT;
 	auto hit_test(POINT cursor) const->LRESULT;
 
-	bool borderless = true; // is the window currently borderless
+	bool borderless = false; // is the window currently borderless
 	bool borderless_resize = true; // should the window allow resizing by dragging the borders while borderless
 	bool borderless_drag = true; // should the window allow moving my dragging the client area
 
