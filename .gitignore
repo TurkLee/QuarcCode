@@ -41,3 +41,7 @@
 *.tlog
 *.txt
 *.recipe
+*.ini
+*.db-wal
+*.db-shm
+*.opendb
