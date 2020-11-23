@@ -17,6 +17,9 @@
     <ClCompile Include="frontend\libraries\imgui\imgui_impl_dx9.cpp" />
     <ClCompile Include="frontend\libraries\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="frontend\libraries\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="frontend\libraries\interface\interface.cpp" />
+    <ClCompile Include="backend\utilites\utilites.cpp" />
+    <ClCompile Include="backend\editor\editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frontend\libraries\borderless\borderless.hpp" />
@@ -27,5 +30,8 @@
     <ClInclude Include="frontend\libraries\imgui\imstb_rectpack.h" />
     <ClInclude Include="frontend\libraries\imgui\imstb_textedit.h" />
     <ClInclude Include="frontend\libraries\imgui\imstb_truetype.h" />
+    <ClInclude Include="frontend\libraries\interface\interface.hpp" />
+    <ClInclude Include="backend\utilites\utilites.hpp" />
+    <ClInclude Include="backend\editor\editor.h" />
   </ItemGroup>
 </Project>

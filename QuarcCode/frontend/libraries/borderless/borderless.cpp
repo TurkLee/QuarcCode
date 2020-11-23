@@ -8,6 +8,8 @@
 #include <dwmapi.h>
 #pragma comment(lib, "dwmapi.lib")
 
+#include "../interface/interface.hpp"
+
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
 #define DIRECTINPUT_VERSION 0x0800
@@ -88,7 +90,7 @@ namespace {
 
 	auto create_window(WNDPROC wndproc, void* userdata) -> unique_handle
 	{
-		auto handle = CreateWindowExW(0, window_class(wndproc), L"QuarcCode", static_cast<DWORD>(Style::basic_borderless), 100, 100, 1280, 720, nullptr, nullptr, nullptr, userdata);
+		auto handle = CreateWindowExW(0, window_class(wndproc), L"QuarcCode - Development Build", static_cast<DWORD>(Style::basic_borderless), 100, 100, 1280, 720, nullptr, nullptr, nullptr, userdata);
 
 		if (!handle)
 			throw last_error("failed to create window");
@@ -113,6 +115,41 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 
 	ImGui::CreateContext();
 
+	ImGui::GetStyle().FrameBorderSize = 0;
+	ImGui::GetStyle().WindowBorderSize = 0;
+	ImGui::GetStyle().PopupBorderSize = 0;
+	ImGui::GetStyle().WindowPadding = { 0,0 };
+	ImGui::GetStyle().WindowRounding = 0;
+
+	ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImVec4(0.21f, 0.21f, 0.21f, 1.f);
+
+	ImGui::GetStyle().Colors[ImGuiCol_Text] = ImVec4(0.89f, 0.89f, 0.89f, 1.f);
+
+	ImGui::GetStyle().Colors[ImGuiCol_Header] = ImVec4(0.21f, 0.21f, 0.21f, 1.f);
+	ImGui::GetStyle().Colors[ImGuiCol_HeaderActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.f);
+	ImGui::GetStyle().Colors[ImGuiCol_HeaderHovered] = ImVec4(0.28f, 0.28f, 0.28f, 1.f);
+
+	ImFontConfig font_config;
+	font_config.OversampleH = 1; //or 2 is the same
+	font_config.OversampleV = 1;
+	font_config.PixelSnapH = 1;
+
+	static const ImWchar ranges[] =
+	{
+		0x0020, 0x00FF, // Basic Latin + Latin Supplement
+		0x2000, 0x206F, // General Punctuation
+		0x3000, 0x30FF, // CJK Symbols and Punctuations, Hiragana, Katakana
+		0x31F0, 0x31FF, // Katakana Phonetic Extensions
+		0xFF00, 0xFFEF, // Half-width characters
+		0x4e00, 0x9FAF, // CJK Ideograms
+		0x0400, 0x052F, // Cyrillic + Cyrillic Supplement
+		0x2DE0, 0x2DFF, // Cyrillic Extended-A
+		0xA640, 0xA69F, // Cyrillic Extended-B
+		0,
+	};
+
+	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Tahoma.ttf", 13.0f, &font_config, ranges);
+
 	ImGui_ImplWin32_Init(handle.get());
 	ImGui_ImplDX9_Init(g_pd3dDevice);
 
@@ -128,7 +165,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 
 		ImGui::NewFrame();
 
-
+		QuarcInterface quarcui;
 
 		ImGui::EndFrame();
 
