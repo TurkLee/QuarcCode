@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="backend\editor\editor.cpp" />
+    <ClCompile Include="backend\filesystem\filesystem.cpp" />
     <ClCompile Include="backend\utilites\utilites.cpp" />
     <ClCompile Include="frontend\libraries\borderless\borderless.cpp" />
     <ClCompile Include="frontend\libraries\imgui\imgui.cpp" />
@@ -33,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backend\editor\editor.h" />
+    <ClInclude Include="backend\filesystem\filesystem.h" />
     <ClInclude Include="backend\utilites\utilites.hpp" />
     <ClInclude Include="frontend\libraries\borderless\borderless.hpp" />
     <ClInclude Include="frontend\libraries\imgui\imgui.h" />
@@ -150,7 +152,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

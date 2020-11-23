@@ -5,10 +5,12 @@
 #include "../imgui/imgui.h"
 #include "../imgui/imgui_internal.h"
 
+#include "../../../backend/filesystem/filesystem.h"
+
 class QuarcInterface
 {
 public:
 	QuarcInterface();
 private:
-
+	int _selectedfile = 0;
 };

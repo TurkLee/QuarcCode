@@ -1,8 +1,8 @@
 #include "utilites.hpp"
 
-std::string QuarcUtils::selectFile()
+std::wstring QuarcUtils::selectFileW()
 {
-	std::string result;
+	std::wstring result;
 
 	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
@@ -28,7 +28,7 @@ std::string QuarcUtils::selectFile()
 
 					if (SUCCEEDED(hr))
 					{
-						//result = pszFilePath;
+						result = pszFilePath;
 						CoTaskMemFree(pszFilePath);
 					}
 					pItem->Release();
@@ -39,5 +39,7 @@ std::string QuarcUtils::selectFile()
 		CoUninitialize();
 	}
 
-	return std::string();
+	return result;
 }
+
+QuarcUtils* qUtils;
