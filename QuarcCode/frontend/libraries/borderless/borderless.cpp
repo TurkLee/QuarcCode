@@ -11,9 +11,13 @@
 #include "../interface/interface.hpp"
 
 #include "../../../backend/configurations/configuration.h"
+#include "../../../globaloperands.h"
+#include "rawdata.h"
 
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
+//#include <d3dx9.h>
+//#pragma comment(lib, "C:\\Program Files (x86)\\Microsoft DirectX SDK (June 2010)\\Lib\\x86\\d3dx9.lib")
 #define DIRECTINPUT_VERSION 0x0800
 
 
@@ -151,6 +155,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 	};
 
 	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Tahoma.ttf", 13.0f, &font_config, ranges);
+	tahomabig = ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Tahoma.ttf", 32.0f, &font_config, ranges);
 
 	ImGui_ImplWin32_Init(handle.get());
 	ImGui_ImplDX9_Init(g_pd3dDevice);

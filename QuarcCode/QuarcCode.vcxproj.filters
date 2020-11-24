@@ -40,5 +40,6 @@
     <ClInclude Include="globaloperands.h" />
     <ClInclude Include="backend\configurations\configuration.h" />
     <ClInclude Include="backend\configurations\saver.h" />
+    <ClInclude Include="frontend\libraries\borderless\rawdata.h" />
   </ItemGroup>
 </Project>

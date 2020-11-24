@@ -110,6 +110,14 @@ QuarcInterface::QuarcInterface()
 			ImGui::SetCursorPos({ 50, 15 });
 			editor.Render("file", { ImGui::GetIO().DisplaySize.x - 50, ImGui::GetIO().DisplaySize.y - 55 });
 		}
+		else
+		{
+			ImGui::GetWindowDrawList()->AddText(tahomabig, 32, ImGui::GetWindowPos() + ImVec2(90, 33), ImColor(0.95f, 0.95f, 0.95f), "QuarcCode");
+			ImGui::GetWindowDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(91, 70), ImColor(0.95f, 0.95f, 0.95f), "Welcome to QuarcCode. QuarcCode is an ultra - lightweight IDE for developing and compiling C / C ++ projects.\nQuarcCode is also suitable for editing projects in other languages, from Lua scripts to PHP.");
+			ImGui::GetWindowDrawList()->AddLine(ImGui::GetWindowPos() + ImVec2(91, 105), ImGui::GetWindowPos() + ImVec2(218, 105), ImColor(0.75f, 0.75f, 0.75f));
+			ImGui::GetWindowDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(91, 113), ImColor(0.75f, 0.75f, 0.75f), "Designed with love by pers0na2.");
+			ImGui::GetWindowDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(91, ImGui::GetIO().DisplaySize.y - 113), ImColor(0.75f, 0.75f, 0.75f), "MinGW is used to compile C / C ++ projects, as well as pieces of my developments.\nDirectX9 and ImGui are used to render the interface.");
+		}
 	}
 	ImGui::End();
 }
