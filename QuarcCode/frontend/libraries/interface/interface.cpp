@@ -18,9 +18,9 @@ QuarcInterface::QuarcInterface()
 
 		if (ImGui::BeginMenu("File", true))
 		{
-			if (ImGui::Button("Open File                                 Ctrl+O", { 200,0 })) { qFiles.OpenFile(); }
+			if (ImGui::Button("Open File                                            ", { 200,0 })) { qFiles.OpenFile(); }
 
-			if (ImGui::Button("Save File                                            ", { 200,0 }))
+			if (ImGui::Button("Save File                                   Ctrl+S", { 200,0 }))
 			{
 				std::ofstream out;
 
@@ -62,7 +62,7 @@ QuarcInterface::QuarcInterface()
 		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), qFiles.files_map.size() > 0 ? ImColor(72, 148, 49, 150) : ImColor(118, 49, 148, 150));
 		ImGui::GetOverlayDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(56, ImGui::GetIO().DisplaySize.y - 36), ImColor(0.95f, 0.95f, 0.95f), _selectedfilepath.c_str());
 
-		if (ImGui::IsKeyDown(VK_CONTROL) && ImGui::IsKeyDown(0x53))
+		if (ImGui::IsKeyPressed(VK_CONTROL) && ImGui::IsKeyPressed(0x53))
 		{
 			std::ofstream out;
 
@@ -70,6 +70,7 @@ QuarcInterface::QuarcInterface()
 			out << editor.GetText() << std::endl;
 			out.close();
 		}
+
 
 		if (qFiles.files_map.size() > 0)
 		{
