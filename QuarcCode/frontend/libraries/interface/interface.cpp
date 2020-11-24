@@ -59,9 +59,17 @@ QuarcInterface::QuarcInterface()
 	ImGui::Begin("##maincontent", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove);
 	{
 		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() - ImVec2(0, 19), ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y), ImColor(0.19f, 0.19f, 0.19f));
-		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImColor(72, 148, 49, 150));
+		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), qFiles.files_map.size() > 0 ? ImColor(72, 148, 49, 150) : ImColor(118, 49, 148, 150));
 		ImGui::GetOverlayDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(56, ImGui::GetIO().DisplaySize.y - 36), ImColor(0.95f, 0.95f, 0.95f), _selectedfilepath.c_str());
 
+		if (ImGui::IsKeyDown(VK_CONTROL) && ImGui::IsKeyDown(0x53))
+		{
+			std::ofstream out;
+
+			out.open(_selectedfilepath);
+			out << editor.GetText() << std::endl;
+			out.close();
+		}
 
 		if (qFiles.files_map.size() > 0)
 		{

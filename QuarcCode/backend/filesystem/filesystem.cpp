@@ -36,7 +36,8 @@ void QuarcFiles::OpenFile()
 {
 	std::string filepath = openAndConvertate();
 
-	files_map.push_back(file{ filepath , base_name(filepath), get_file_extension(filepath) });
+	if (filepath != "")
+		files_map.push_back(file{ filepath , base_name(filepath), get_file_extension(filepath) });
 }
 
 QuarcFiles qFiles;
