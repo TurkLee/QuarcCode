@@ -7,6 +7,8 @@
 
 #include "../../../backend/filesystem/filesystem.h"
 
+#include "../../../globaloperands.h"
+
 class QuarcInterface
 {
 public:

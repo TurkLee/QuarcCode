@@ -35,5 +35,6 @@
     <ClInclude Include="backend\utilites\utilites.hpp" />
     <ClInclude Include="backend\editor\editor.h" />
     <ClInclude Include="backend\filesystem\filesystem.h" />
+    <ClInclude Include="globaloperands.h" />
   </ItemGroup>
 </Project>

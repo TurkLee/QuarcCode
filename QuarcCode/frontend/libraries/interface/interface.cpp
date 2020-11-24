@@ -6,15 +6,28 @@
 #include "../../../backend/editor/editor.h"
 #include "../../../backend/filesystem/filesystem.h"
 
+std::string _selectedfilepath;
+
 QuarcInterface::QuarcInterface()
 {
-	static TextEditor editor;
 
 	if (ImGui::BeginMainMenuBar())
 	{
+		ImGui::Spacing();
+		ImGui::SameLine(54);
+
 		if (ImGui::BeginMenu("File", true))
 		{
 			if (ImGui::Button("Open File                                 Ctrl+O", { 200,0 })) { qFiles.OpenFile(); }
+
+			if (ImGui::Button("Save File                                            ", { 200,0 }))
+			{
+				std::ofstream out;
+
+				out.open(_selectedfilepath);
+				out << editor.GetText() << std::endl;
+				out.close();
+			}
 
 			ImGui::EndMenu();
 		}
@@ -45,14 +58,19 @@ QuarcInterface::QuarcInterface()
 	ImGui::SetNextWindowPos({ 0, 19 });
 	ImGui::Begin("##maincontent", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove);
 	{
-		ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetWindowPos(), ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y), ImColor(0.19f, 0.19f, 0.19f));
+		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() - ImVec2(0, 19), ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y), ImColor(0.19f, 0.19f, 0.19f));
+		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImColor(0.25f, 0.25f, 0.25f));
+		ImGui::GetOverlayDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(56, ImGui::GetIO().DisplaySize.y - 36), ImColor(0.8f, 0.8f, 0.8f), _selectedfilepath.c_str());
 
-		ImGui::SetCursorPos({ 50, 0 });
-		if (ImGui::BeginTabBar("filestabbar", ImGuiTabBarFlags_Reorderable))
+
+		if (qFiles.files_map.size() > 0)
 		{
+			ImGui::SetCursorPos({ 50, 0 });
+			ImGui::BeginGroup();
 			for (auto iter = qFiles.files_map.begin(); iter != qFiles.files_map.end(); iter++)
 			{
-				ImGui::BeginTabItem(iter->filename.c_str());
+				if (ImGui::Button(iter->filename.c_str()))
+					_selectedfilepath = iter->path;
 
 				if (ImGui::IsItemClicked(0))
 				{
@@ -73,13 +91,15 @@ QuarcInterface::QuarcInterface()
 					qFiles.files_map.erase(iter);
 					editor.SetText("");
 				}
+
+				ImGui::SameLine();
 			}
+			ImGui::EndGroup();
 
-			ImGui::EndTabBar();
+
+			ImGui::SetCursorPos({ 50, 15 });
+			editor.Render("file", { ImGui::GetIO().DisplaySize.x - 50, ImGui::GetIO().DisplaySize.y - 55 });
 		}
-
-		ImGui::SetCursorPos({ 50, 15 });
-		editor.Render("file", { ImGui::GetIO().DisplaySize.x - 50, ImGui::GetIO().DisplaySize.y - 33 });
 	}
 	ImGui::End();
 }

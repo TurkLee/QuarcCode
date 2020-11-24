@@ -25,12 +25,18 @@ T remove_extension(T const& filename)
 	return p > 0 && p != T::npos ? filename.substr(0, p) : filename;
 }
 
+std::string get_file_extension(const std::string& FileName)
+{
+	if (FileName.find_last_of(".") != std::string::npos)
+		return FileName.substr(FileName.find_last_of(".") + 1);
+	return "";
+}
 
 void QuarcFiles::OpenFile()
 {
 	std::string filepath = openAndConvertate();
 
-	files_map.push_back(file{ filepath , base_name(filepath) });
+	files_map.push_back(file{ filepath , base_name(filepath), get_file_extension(filepath) });
 }
 
 QuarcFiles qFiles;

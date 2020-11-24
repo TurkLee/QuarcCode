@@ -45,6 +45,7 @@
     <ClInclude Include="frontend\libraries\imgui\imstb_textedit.h" />
     <ClInclude Include="frontend\libraries\imgui\imstb_truetype.h" />
     <ClInclude Include="frontend\libraries\interface\interface.hpp" />
+    <ClInclude Include="globaloperands.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

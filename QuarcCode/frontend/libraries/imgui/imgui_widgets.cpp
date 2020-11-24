@@ -1419,7 +1419,7 @@ void ImGui::SeparatorEx(ImGuiSeparatorFlags flags)
 		if (item_visible)
 		{
 			// Draw
-			window->DrawList->AddLine(bb.Min, ImVec2(bb.Max.x, bb.Min.y), GetColorU32(ImGuiCol_Separator));
+			window->DrawList->AddLine(bb.Min + ImVec2(20, 0), ImVec2(bb.Max.x - 20, bb.Min.y), GetColorU32(ImGuiCol_Separator));
 			if (g.LogEnabled)
 				LogRenderedText(&bb.Min, "--------------------------------");
 		}
