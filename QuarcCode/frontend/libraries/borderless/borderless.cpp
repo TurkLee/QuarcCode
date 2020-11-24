@@ -10,6 +10,8 @@
 
 #include "../interface/interface.hpp"
 
+#include "../../../backend/configurations/configuration.h"
+
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
 #define DIRECTINPUT_VERSION 0x0800
@@ -187,6 +189,8 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 		if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 			ResetDevice();
 	}
+
+	qSaver.SaveLatestFiles();
 
 	ImGui_ImplDX9_Shutdown();
 	ImGui_ImplWin32_Shutdown();

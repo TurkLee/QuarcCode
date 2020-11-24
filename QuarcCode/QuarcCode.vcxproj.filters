@@ -21,6 +21,8 @@
     <ClCompile Include="backend\utilites\utilites.cpp" />
     <ClCompile Include="backend\editor\editor.cpp" />
     <ClCompile Include="backend\filesystem\filesystem.cpp" />
+    <ClCompile Include="backend\configurations\configuration.cpp" />
+    <ClCompile Include="backend\configurations\saver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frontend\libraries\borderless\borderless.hpp" />
@@ -36,5 +38,7 @@
     <ClInclude Include="backend\editor\editor.h" />
     <ClInclude Include="backend\filesystem\filesystem.h" />
     <ClInclude Include="globaloperands.h" />
+    <ClInclude Include="backend\configurations\configuration.h" />
+    <ClInclude Include="backend\configurations\saver.h" />
   </ItemGroup>
 </Project>

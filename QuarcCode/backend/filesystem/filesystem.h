@@ -23,8 +23,6 @@ class QuarcFiles
 public:
 	void OpenFile();
 
-
-private:
 	struct file
 	{
 		std::string path;

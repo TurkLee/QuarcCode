@@ -45,3 +45,5 @@
 *.db-wal
 *.db-shm
 *.opendb
+*.testlog
+*.manifest

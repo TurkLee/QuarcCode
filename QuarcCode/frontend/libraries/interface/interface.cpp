@@ -59,8 +59,8 @@ QuarcInterface::QuarcInterface()
 	ImGui::Begin("##maincontent", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove);
 	{
 		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() - ImVec2(0, 19), ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y), ImColor(0.19f, 0.19f, 0.19f));
-		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImColor(0.25f, 0.25f, 0.25f));
-		ImGui::GetOverlayDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(56, ImGui::GetIO().DisplaySize.y - 36), ImColor(0.8f, 0.8f, 0.8f), _selectedfilepath.c_str());
+		ImGui::GetOverlayDrawList()->AddRectFilled(ImGui::GetWindowPos() + ImVec2(50, ImGui::GetIO().DisplaySize.y - 40), ImGui::GetWindowPos() + ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImColor(72, 148, 49, 150));
+		ImGui::GetOverlayDrawList()->AddText(ImGui::GetWindowPos() + ImVec2(56, ImGui::GetIO().DisplaySize.y - 36), ImColor(0.95f, 0.95f, 0.95f), _selectedfilepath.c_str());
 
 
 		if (qFiles.files_map.size() > 0)
@@ -90,6 +90,7 @@ QuarcInterface::QuarcInterface()
 				{
 					qFiles.files_map.erase(iter);
 					editor.SetText("");
+					_selectedfilepath = "";
 				}
 
 				ImGui::SameLine();

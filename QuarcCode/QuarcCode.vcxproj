@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="backend\configurations\configuration.cpp" />
+    <ClCompile Include="backend\configurations\saver.cpp" />
     <ClCompile Include="backend\editor\editor.cpp" />
     <ClCompile Include="backend\filesystem\filesystem.cpp" />
     <ClCompile Include="backend\utilites\utilites.cpp" />
@@ -33,6 +35,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="backend\configurations\configuration.h" />
+    <ClInclude Include="backend\configurations\saver.h" />
     <ClInclude Include="backend\editor\editor.h" />
     <ClInclude Include="backend\filesystem\filesystem.h" />
     <ClInclude Include="backend\utilites\utilites.hpp" />
@@ -168,7 +172,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
