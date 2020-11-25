@@ -5,19 +5,22 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-class QuarcSaver
+namespace QuarcSaverN
 {
-public:
-
 	struct settings
 	{
 		int latestfilessize;
 	};
+}
+
+class QuarcSaver
+{
+public:
 
 	QuarcSaver();
 
-	void SaveLatestFiles();
-	void LoadLatestFiles();
+	void SaveSettings();
+	void LoadSettings();
 };
 
 extern QuarcSaver qSaver;

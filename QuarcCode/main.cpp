@@ -9,7 +9,7 @@ int CALLBACK wWinMain(HINSTANCE /*inst*/, HINSTANCE /*prev*/, LPWSTR /*cmd*/, in
 
 	OleInitialize(NULL);
 
-	qSaver.LoadLatestFiles();
+	qSaver.LoadSettings();
 
 	try
 	{

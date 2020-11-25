@@ -96,7 +96,7 @@ namespace {
 
 	auto create_window(WNDPROC wndproc, void* userdata) -> unique_handle
 	{
-		auto handle = CreateWindowExW(0, window_class(wndproc), L"QuarcCode - Development Build", static_cast<DWORD>(Style::basic_borderless), 100, 100, 1280, 720, nullptr, nullptr, nullptr, userdata);
+		auto handle = CreateWindowExW(0, window_class(wndproc), L"QuarcCode - Unstable Build", static_cast<DWORD>(Style::basic_borderless), 100, 100, 990, 580, nullptr, nullptr, nullptr, userdata);
 
 		if (!handle)
 			throw last_error("failed to create window");
@@ -116,6 +116,8 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 		return;
 	}
 
+	RegisterDragDrop(handle.get(), &dm);
+
 	::ShowWindow(handle.get(), SW_SHOW);
 	::UpdateWindow(handle.get());
 
@@ -128,6 +130,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 	ImGui::GetStyle().WindowRounding = 0;
 
 	ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImVec4(0.21f, 0.21f, 0.21f, 1.f);
+	ImGui::GetStyle().Colors[ImGuiCol_PopupBg] = ImVec4(22 / 255.f, 22 / 255.f, 22 / 255.f, 1.f);
 
 	ImGui::GetStyle().Colors[ImGuiCol_Text] = ImVec4(0.89f, 0.89f, 0.89f, 1.f);
 
@@ -156,6 +159,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 
 	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Tahoma.ttf", 13.0f, &font_config, ranges);
 	tahomabig = ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Tahoma.ttf", 32.0f, &font_config, ranges);
+	firacode = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(Font_compressed_data, Font_compressed_size, 14, &font_config, ranges);
 
 	ImGui_ImplWin32_Init(handle.get());
 	ImGui_ImplDX9_Init(g_pd3dDevice);
@@ -195,7 +199,7 @@ BorderlessWindow::BorderlessWindow() : handle{ create_window(&BorderlessWindow::
 			ResetDevice();
 	}
 
-	qSaver.SaveLatestFiles();
+	qSaver.SaveSettings();
 
 	ImGui_ImplDX9_Shutdown();
 	ImGui_ImplWin32_Shutdown();
@@ -244,6 +248,10 @@ auto CALLBACK BorderlessWindow::WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPAR
 				ResetDevice();
 			}
 			return 0;
+		case WM_GETMINMAXINFO:
+			LPMINMAXINFO(lparam)->ptMinTrackSize.x = 990;
+			LPMINMAXINFO(lparam)->ptMinTrackSize.y = 580;
+			break;
 		case WM_NCCALCSIZE: {
 			if (wparam == TRUE && window.borderless) {
 				auto& params = *reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam);

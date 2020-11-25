@@ -1,6 +1,7 @@
 #include "configuration.h"
 
 #define _CRT_SECURE_NO_WARNINGS
+#include "../../globaloperands.h"
 
 QuarcSaver::QuarcSaver()
 {
@@ -12,7 +13,7 @@ std::string GetTempDataPath()
 	return getenv("APPDATA");
 }
 
-void QuarcSaver::SaveLatestFiles()
+void QuarcSaver::SaveSettings()
 {
 	CreateDirectoryA(std::string(GetTempDataPath() + "//QuarcCode").c_str(), NULL);
 
@@ -31,7 +32,7 @@ void QuarcSaver::SaveLatestFiles()
 	}
 }
 
-void QuarcSaver::LoadLatestFiles()
+void QuarcSaver::LoadSettings()
 {
 	CreateDirectoryA(std::string(GetTempDataPath() + "//QuarcCode").c_str(), NULL);
 

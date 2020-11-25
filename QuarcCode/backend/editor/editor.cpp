@@ -2744,6 +2744,7 @@ static bool TokenizeCStylePunctuation(const char* in_begin, const char* in_end, 
 	return false;
 }
 
+
 const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::CPlusPlus()
 {
 	static bool inited = false;
