@@ -32,7 +32,7 @@ class QuarcFiles
 public:
 	std::string openAndConvertate();
 	std::string get_file_extension(const std::string& FileName);
-	void OpenFile();
+	bool OpenFile();
 
 	std::string delimer = "/\\";
 	bool dragndrop;

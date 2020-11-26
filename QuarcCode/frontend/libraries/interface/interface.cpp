@@ -6,7 +6,6 @@
 #include "../../../backend/editor/editor.h"
 #include "../../../backend/filesystem/filesystem.h"
 
-std::string _selectedfilepath;
 bool Preferencesbool = false;
 
 QuarcInterface::QuarcInterface()
@@ -19,7 +18,10 @@ QuarcInterface::QuarcInterface()
 
 		if (ImGui::BeginMenu("File", true))
 		{
-			if (ImGui::Button("Open File                                            ", { 200,0 })) { qFiles.OpenFile(); }
+			if (ImGui::Button("Open File                                            ", { 200,0 }))
+			{
+				qFiles.OpenFile();
+			}
 
 			if (ImGui::Button("Save File                                   Ctrl+S", { 200,0 }))
 			{
@@ -88,9 +90,11 @@ QuarcInterface::QuarcInterface()
 				ImGui::BeginGroup();
 				for (auto iter = qFiles.files_map.begin(); iter != qFiles.files_map.end(); iter++)
 				{
+					ImGui::PushID(distance(qFiles.files_map.begin(), iter));
 					if (ImGui::TabEx(iter->filename.c_str(), ImVec2{ ImGui::CalcTextSize(iter->filename.c_str()).x + 20, 30 }, _selectedtab == distance(qFiles.files_map.begin(), iter)))
 						_selectedfilepath = iter->path,
 						_selectedtab = distance(qFiles.files_map.begin(), iter);
+					ImGui::PopID();
 
 					if (ImGui::IsItemClicked(0))
 					{

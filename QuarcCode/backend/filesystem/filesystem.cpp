@@ -1,5 +1,7 @@
 #include "filesystem.h"
 
+#include "../../globaloperands.h"
+
 #define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
 
@@ -30,12 +32,35 @@ std::string QuarcFiles::get_file_extension(const std::string& FileName)
 	return "";
 }
 
-void QuarcFiles::OpenFile()
+bool QuarcFiles::OpenFile()
 {
 	std::string filepath = openAndConvertate();
 
 	if (filepath != "")
+	{
 		files_map.push_back({ filepath , base_name(filepath, qFiles.delimer), get_file_extension(filepath) });
+
+		editor.SetReadOnly(false);
+
+		std::ifstream t(filepath);
+
+		if (t.good())
+		{
+			std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+			editor.SetText(str);
+		}
+
+		t.close();
+
+		_selectedfilepath = filepath,
+		_selectedtab = files_map.size() - 1;
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 QuarcFiles qFiles;

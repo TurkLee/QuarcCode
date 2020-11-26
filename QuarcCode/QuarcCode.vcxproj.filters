@@ -41,5 +41,12 @@
     <ClInclude Include="backend\configurations\configuration.h" />
     <ClInclude Include="backend\configurations\saver.h" />
     <ClInclude Include="frontend\libraries\borderless\rawdata.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QuarcCode.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>
